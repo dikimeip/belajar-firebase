@@ -31,13 +31,17 @@
         firebase.initializeApp(firebaseConfig);
 
         const db = firebase.database().ref('mahasiswa');
-        db.orderByChild('nama').on('value',showData,errData);
+        db.orderByChild('nama').equalTo('andi').on('value',showData,errData);
         //db.on('child_added',showMessage)
         //value = child_added => muncul ketika penambahan data baru
         // child_changed => muncul ketika kita mangubah data 
 
         // filter order 
         // order => orderBy(default),orderByChild(),orderByVal() 
+
+        // filter 
+        // startAt(),endAt(),equalsTo()=>sama seperti sesuai dengan order,limitToFirst(),limitToEnd()
+
 
         function showData(items){
             var el = document.getElementsByTagName('ul')[0];
