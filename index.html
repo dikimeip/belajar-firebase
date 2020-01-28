@@ -8,8 +8,7 @@
 </head>
 
 <body>
-
-
+    <ul></ul>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
 
@@ -32,11 +31,25 @@
         firebase.initializeApp(firebaseConfig);
 
         const db = firebase.database().ref('mahasiswa');
-        db.on('value',showData,errData);
+        db.orderByChild('nama').on('value',showData,errData);
+        //db.on('child_added',showMessage)
         //value = child_added => muncul ketika penambahan data baru
+        // child_changed => muncul ketika kita mangubah data 
+
+        // filter order 
+        // order => orderBy(default),orderByChild(),orderByVal() 
 
         function showData(items){
-            console.log(items.val())
+            var el = document.getElementsByTagName('ul')[0];
+            var _konten = ""
+            items.forEach(item => {
+                _konten += "<li>"+item.val().nama+"||"+item.val().jurusan+"</li>"
+            });
+            el.innerHTML=_konten
+        }
+
+        function showMessage(items){
+           console.log( `item ${items.val().nama} telah ditambah ` )
         }
 
         function errData(err){
