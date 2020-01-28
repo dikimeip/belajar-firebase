@@ -42,6 +42,21 @@
         // filter 
         // startAt(),endAt(),equalsTo()=>sama seperti sesuai dengan order,limitToFirst(),limitToEnd()
 
+        //tambah data 
+        // set => replace data yang sudah ada 
+        // push => ini yang cocok,id otomatis 
+        // update => update data
+
+        db.on('child_added',showMessage)
+        //db.child(1).remove()
+        db.update({
+           2  : {
+               "nama" : "DIki Mei",
+               "nim" : 121212
+           }
+        })
+
+
 
         function showData(items){
             var el = document.getElementsByTagName('ul')[0];
@@ -53,7 +68,7 @@
         }
 
         function showMessage(items){
-           console.log( `item ${items.val().nama} telah ditambah ` )
+           console.log('added success')
         }
 
         function errData(err){
