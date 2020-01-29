@@ -38,7 +38,7 @@
                             <input type="text" class="form-control" id="nama">
                         </div>
                         <div class="form-group">
-                            <label>MASUKAN ALAMAT</label>
+                            <label>MASUKAN NIM</label>
                             <input type="text" class="form-control" id="alamat">
                         </div>
                         <div class="form-group">
@@ -72,8 +72,9 @@
         var itms = "";
         function setSuccess(items) {
             items.forEach(itm => {
-                itms += "<tr><td>" + itm.val().nama + "</td><td>" + itm.val().nim + "</td><td>" + itm.val().jurusan + "</td><td></td></tr>"
+                 itms += "<tr><td>" + itm.val().nama + "</td><td>" + itm.val().nim + "</td><td>" + itm.val().jurusan + "</td><td><button onclick= hapusData("+itm.key+") class='btn btn-danger'>HAPUS</button></td></tr>"
             });
+           
             tag.innerHTML = itms
         }
 
@@ -83,11 +84,28 @@
 
         const tomboltambah = document.getElementById('simpan')
         const nama = document.getElementById('nama')
-        const alamat = document.getElementById('a')
+        const alamat = document.getElementById('alamat')
         const semester = document.getElementById('semester')
-        tomboltambah.addEventListener('click',submitData)
-        function submitData(){
-            console.log(nama.value)
+        tomboltambah.addEventListener('click', submitData)
+        function hapusData(s){
+            console.log(s)
+            //db.child(id).remove()
+        }
+        function submitData() {
+            const txtnama = nama.value;
+            const txtalamat = alamat.value;
+            const txtsemester = semester.value;
+            console.log(txtnama,txtsemester,txtalamat)
+            db.on('child_added',showMessage)
+            db.push({
+                'nama': txtnama,
+                'nim': txtalamat,
+                'jurusan': txtsemester
+            })
+        }
+
+        function showMessage() {
+            console.log('added dta succes')
         }
     </script>
 
