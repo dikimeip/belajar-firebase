@@ -14,32 +14,83 @@
         <button class="btn btn-info" data-toggle="modal" data-target="#tambah">TAMBAH</button>
         <br><br>
         <table class="table table-hover">
-            <tr>
-                <th>NAMA</th>
-                <th>ALAMAT</th>
-                <th>semester</th>
-                <th>aksi</th>
-            </tr>
-            <tr>
-                <td>DIKI</td>
-                <td>SIDOARJO</td>
-                <td>V</td>
-                <td>
-                    <a href="" class="btn btn-warning">HAPUS</a>
-                    <a href="" class="btn btn-info">EDIT</a>
-                </td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>NAMA</th>
+                    <th>ALAMAT</th>
+                    <th>semester</th>
+                    <th>aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
         </table>
         <div id="tambah" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
+                    <div class="modal-header">
+                        <b>TAMBAH DATA</b>
+                    </div>
                     <div class="modal-body">
-                        <h1>HELLO WORD</h1>
+                        <div class="form-group">
+                            <label>MASUKAN NAMA</label>
+                            <input type="text" class="form-control" id="nama">
+                        </div>
+                        <div class="form-group">
+                            <label>MASUKAN ALAMAT</label>
+                            <input type="text" class="form-control" id="alamat">
+                        </div>
+                        <div class="form-group">
+                            <label>MASUKAN SEMESTER</label>
+                            <input type="text" class="form-control" id="semester">
+                        </div>
+                        <input type="submit" class="btn btn-info" value="SIMPAN" id="simpan">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyB7eW8x23jrUD1df88EADTUuh2dMtLZqV0",
+            authDomain: "fir-dasar-ad5b6.firebaseapp.com",
+            databaseURL: "https://fir-dasar-ad5b6.firebaseio.com",
+            projectId: "fir-dasar-ad5b6",
+            storageBucket: "fir-dasar-ad5b6.appspot.com",
+            messagingSenderId: "273588853948",
+            appId: "1:273588853948:web:afaadfb37c3768f1f084b9"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        const db = firebase.database().ref('mahasiswa');
+        db.on('value', setSuccess, errShow);
+
+        var tag = document.getElementsByTagName('tbody')[0];
+        var itms = "";
+        function setSuccess(items) {
+            items.forEach(itm => {
+                itms += "<tr><td>" + itm.val().nama + "</td><td>" + itm.val().nim + "</td><td>" + itm.val().jurusan + "</td><td></td></tr>"
+            });
+            tag.innerHTML = itms
+        }
+
+        function errShow(err) {
+            console.log(err)
+        }
+
+        const tomboltambah = document.getElementById('simpan')
+        const nama = document.getElementById('nama')
+        const alamat = document.getElementById('a')
+        const semester = document.getElementById('semester')
+        tomboltambah.addEventListener('click',submitData)
+        function submitData(){
+            console.log(nama.value)
+        }
+    </script>
+
     <script src="jquery.js"></script>
     <script src="bootstrap.js"></script>
 
