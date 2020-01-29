@@ -5,77 +5,44 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>BELAJAR FIREBASE</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
 </head>
 
 <body>
-    <ul></ul>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <div class="container">
+        <h1>HELLO WORD</h1>
+        <button class="btn btn-info" data-toggle="modal" data-target="#tambah">TAMBAH</button>
+        <br><br>
+        <table class="table table-hover">
+            <tr>
+                <th>NAMA</th>
+                <th>ALAMAT</th>
+                <th>semester</th>
+                <th>aksi</th>
+            </tr>
+            <tr>
+                <td>DIKI</td>
+                <td>SIDOARJO</td>
+                <td>V</td>
+                <td>
+                    <a href="" class="btn btn-warning">HAPUS</a>
+                    <a href="" class="btn btn-info">EDIT</a>
+                </td>
+            </tr>
+        </table>
+        <div id="tambah" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h1>HELLO WORD</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="jquery.js"></script>
+    <script src="bootstrap.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-     <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
-
-    <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyB7eW8x23jrUD1df88EADTUuh2dMtLZqV0",
-            authDomain: "fir-dasar-ad5b6.firebaseapp.com",
-            databaseURL: "https://fir-dasar-ad5b6.firebaseio.com",
-            projectId: "fir-dasar-ad5b6",
-            storageBucket: "fir-dasar-ad5b6.appspot.com",
-            messagingSenderId: "273588853948",
-            appId: "1:273588853948:web:afaadfb37c3768f1f084b9"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        const db = firebase.database().ref('mahasiswa');
-        db.orderByChild('nama').equalTo('andi').on('value',showData,errData);
-        //db.on('child_added',showMessage)
-        //value = child_added => muncul ketika penambahan data baru
-        // child_changed => muncul ketika kita mangubah data 
-
-        // filter order 
-        // order => orderBy(default),orderByChild(),orderByVal() 
-
-        // filter 
-        // startAt(),endAt(),equalsTo()=>sama seperti sesuai dengan order,limitToFirst(),limitToEnd()
-
-        //tambah data 
-        // set => replace data yang sudah ada 
-        // push => ini yang cocok,id otomatis 
-        // update => update data
-
-        db.on('child_added',showMessage)
-        //db.child(1).remove()
-        db.update({
-           2  : {
-               "nama" : "DIki Mei",
-               "nim" : 121212
-           }
-        })
-
-
-
-        function showData(items){
-            var el = document.getElementsByTagName('ul')[0];
-            var _konten = ""
-            items.forEach(item => {
-                _konten += "<li>"+item.val().nama+"||"+item.val().jurusan+"</li>"
-            });
-            el.innerHTML=_konten
-        }
-
-        function showMessage(items){
-           console.log('added success')
-        }
-
-        function errData(err){
-            console.log(err)
-        }
-
-    </script>
 </body>
 
 </html>
